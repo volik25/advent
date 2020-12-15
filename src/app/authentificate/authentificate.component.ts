@@ -12,7 +12,7 @@ export class AuthentificateComponent implements OnInit {
   public mainUrl = environment.mainUrl;
   public user: any = null;
   constructor(private api: ApiService) {
-    let response = window.location.href.split('#')[1]
+    let response = window.location.href.split('#')[1];
     if (response) {
       this.user = this.getParams(response);
       sessionStorage.setItem('token', this.user.access_token);
@@ -25,7 +25,7 @@ export class AuthentificateComponent implements OnInit {
   }
 
   public oAuthVK() {
-    window.location.href = this.mainUrl;
+    window.location.href = this.baseAuth;
   }
 
   public getParams(response: string) {

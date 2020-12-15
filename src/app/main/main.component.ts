@@ -13,8 +13,13 @@ export class MainComponent implements OnInit {
 
   ngOnInit(): void {
     this.api.getPhoto().subscribe((res: any) => {
-      this.userData = res.response[0];
-      this.photoSrc = this.userData.crop_photo.photo.sizes[0].url;
+      if (res.response) {
+        this.userData = res.response[0];
+        this.photoSrc = this.userData.crop_photo.photo.sizes[0].url;
+      }
+      if (res.error) {
+        console.log(res.error);
+      }
     })
   }
 }
