@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { environment } from 'src/environments/environment';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ApiService } from '../services/api.service';
 
 @Component({
@@ -8,33 +8,27 @@ import { ApiService } from '../services/api.service';
   styleUrls: ['./authentificate.component.less']
 })
 export class AuthentificateComponent implements OnInit {
-  public baseAuth = environment.baseAuth;
-  public mainUrl = environment.mainUrl;
-  public user: any = null;
-  constructor(private api: ApiService) {
-    let response = window.location.href.split('#')[1];
-    if (response) {
-      this.user = this.getParams(response);
-      sessionStorage.setItem('token', this.user.access_token);
-      window.location.href = "http://localhost:4200";
-    }
+  public userForm: FormGroup;
+  constructor(private api: ApiService, private fb: FormBuilder) {
+    this.userForm = this.fb.group({
+      userName: ['', Validators.required],
+      faculty: ['', Validators.required],
+      course: ['', Validators.required]
+    })
   }
 
   ngOnInit(): void {
-
-  }
-
-  public oAuthVK() {
-    window.location.href = this.baseAuth;
-  }
-
-  public getParams(response: string) {
-    let paramString = response.split('&');
-    let params: {[key: string]: any} = {};
-    paramString.forEach(param => {
-      let paramObject = param.split('=');
-      params[paramObject[0]] = paramObject[1];
+    this.api.getUser().subscribe(res => {
+      if (res.response) {
+        this.userForm.get('userName')?.setValue(`${res.response[0].last_name} ${res.response[0].first_name}`);
+      }
+      if (res.error) {
+        console.log(res.error);
+      }
     })
-    return params;
+  }
+
+  public dataSave() {
+
   }
 }

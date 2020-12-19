@@ -1,4 +1,4 @@
-<div class="d-flex flex-column">
+<div class="d-flex flex-column main">
     <div class="container d-flex justify-content-between align-items-center">
         <div class="logo mt-2">
             <img src="../../assets/resources/Ik_logo.svg">
@@ -6,21 +6,17 @@
         <div class="header">
             <h1>Адвент</h1>
             <div>
-                Семь дней и семь вопросов от Информационного комитета и один бокс F&U. Верные и креативные ответы = победа в адвенте. Желаем удачи!
+                Семь дней и семь вопросов от Информационного комитета и один бокс F&U. Верные и креативные ответы =
+                победа в адвенте. Желаем удачи!
             </div>
         </div>
         <div>
-            <div *ngIf="photoSrc" class="d-flex justify-content-end align-items-center pt-2 pr-2">
-                <h6>{{userName}}</h6>
-                <div class="img-block ml-2">
-                    <img [src]="photoSrc" [style]="photoCrop">
-                </div>
-            </div>
-            <div *ngIf="!photoSrc" class="d-flex justify-content-end align-items-center pt-2 pr-2">
-                <div routerLink="/auth" class="pointer no-active-border d-flex justify-content-end align-items-center">
-                    <h6>Авторизоваться</h6>
+            <div class="d-flex justify-content-end align-items-center pt-2 pr-2">
+                <div (click)="auth()" class="pointer no-active-border d-flex justify-content-end align-items-center">
+                    <h6>{{userName ? userName : 'Авторизоваться'}}</h6>
                     <div class="img-block ml-2">
-                        <img src="./../../assets/user.jpg" width="100%">
+                        <img *ngIf="photoSrc" [src]="photoSrc" [style]="photoCrop">
+                        <img *ngIf="!photoSrc" src="./../../assets/user.jpg" width="100%">
                     </div>
                 </div>
             </div>
@@ -31,8 +27,8 @@
         <img src="../../assets/resources/blue_line.svg">
     </div>
     <div class="container d-flex flex-wrap justify-content-center">
-        <div class="advent-block mx-3" *ngFor="let day of days">
-            {{day}}
+        <div class="advent-block pointer mx-3" *ngFor="let day of days" (click)="toAnswer(day.id)">
+            {{day.id}}
         </div>
     </div>
     <div class="tree">
@@ -40,6 +36,8 @@
         <img src="../../assets/resources/red_line.svg">
     </div>
     <div class="container footer">
-        Бокс F&U, который стоит под ёлкой Информационного комитета, достанется сильнейшему. В нём разные подарки на любой вкус — от тёплого мерча, согревающего на дистанционке, до милой безделушки для создания новогоднего настроения.
+        Бокс F&U, который стоит под ёлкой Информационного комитета, достанется сильнейшему. В нём разные подарки на
+        любой вкус — от тёплого мерча, согревающего на дистанционке, до милой безделушки для создания новогоднего
+        настроения.
     </div>
 </div>

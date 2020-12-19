@@ -3,7 +3,7 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  baseAuth: 'https://oauth.vk.com/authorize?client_id=7698358&display=page&redirect_uri=http://localhost:4200/auth&scope=friends&response_type=token&v=5.126',
+  baseAuth: 'https://oauth.vk.com/authorize?client_id=7698358&display=page&redirect_uri=http://localhost:4200&scope=friends&response_type=token&v=5.126',
   mainUrl: 'http://localhost:4200',
   production: false
 };

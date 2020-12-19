@@ -1,1 +1,37 @@
-<button (click)="oAuthVK()">Войти через Вк</button>
+<div class="d-flex flex-column justify-content-between align-items-center auth">
+    <div class="w-100 mt-5" style="position: relative;">
+        <img src="../../assets/resources/red_line.svg">
+        <img src="../../assets/resources/blue_line.svg">
+        <div class="gloves">
+            <img src="../../assets/resources/gloves.svg" width="100px">
+        </div>
+    </div>
+    <div class="container d-flex justify-content-center align-items-center">
+        <form [formGroup]="userForm" (submit)="dataSave()">
+            <div class="form-group">
+                <label for="LnFn">ФИ</label>
+                <input formControlName="userName" class="form-control" type="text" id="LnFn">
+            </div>
+            <div class="form-group">
+                <label for="faculty">Факультет</label>
+                <input formControlName="faculty" class="form-control" type="text" id="faculty">
+            </div>
+            <div class="form-group">
+                <label for="course">Курс</label>
+                <input formControlName="course" class="form-control" type="number" id="course">
+            </div>
+            <button type="submit" class="btn btn-primary">Сохранить</button>
+        </form>
+    </div>
+    <div class="w-100 mb-5" style="position: relative;">
+        <div class="candle">
+            <img src="../../assets/resources/candle.svg" width="100px">
+        </div>
+        <img src="../../assets/resources/blue_line.svg">
+        <img src="../../assets/resources/red_line.svg">
+        <div class="container text">
+            Не забывай заходить на сайт каждый день и открывать новую ячейку адвента. Чтобы ничего не пропустить,
+            уведомления в вк всё тебе напомнят.
+        </div>
+    </div>
+</div>

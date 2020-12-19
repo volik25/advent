@@ -12,4 +12,8 @@ export class ApiService {
     public getPhoto(): Observable<any> {
         return this.http.jsonp<any>(`${this.baseApi}users.get?fields=crop_photo&v=${this.version}`, 'callback');
     }
+
+    public getUser(): Observable<any> {
+        return this.http.jsonp<any>(`${this.baseApi}users.get?v=${this.version}`, 'callback');
+    }
 }
