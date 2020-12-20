@@ -32,7 +32,6 @@ export class MainComponent implements OnInit {
         let day = parseInt(date.substring(0, 2));
         let mY = date.substring(3).split('/')
         if (parseInt(mY[0]) === 12 && parseInt(mY[1]) === 2020) {
-          day = 27
           if (day > 27 || day < 21) {
             router.navigate(['/finished']);
           }
