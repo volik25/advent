@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { environment } from 'src/environments/environment';
-import { Answer, answers } from '../models/answer.model';
+import { Answer, answers, BaseAnswer } from '../models/answer.model';
 import { ApiService } from '../services/api.service';
 import { DayService } from '../services/days.service';
+import { vkApiService } from '../services/vkApi.service';
 
 @Component({
   selector: 'app-main',
@@ -17,19 +18,35 @@ export class MainComponent implements OnInit {
   public crop!: any;
   public photoCrop!: any;
   public photoSrc!: string;
-  public days: Answer[] = answers;
+  public days!: Answer[];
   public userData: any = null;
-  constructor(private api: ApiService, private dS: DayService, private router: Router) {
+  constructor(private vkApi: vkApiService, private api: ApiService, private dS: DayService, private router: Router) {
     let response = window.location.href.split('#')[1];
     if (response) {
       this.userData = this.getParams(response);
       sessionStorage.setItem('token', this.userData.access_token);
       router.navigate(['/auth']);
     }
+    else {
+      this.api.getDate().subscribe((date: string) => {
+        let day = parseInt(date.substring(0, 2));
+        let mY = date.substring(3).split('/')
+        if (parseInt(mY[0]) === 12 && parseInt(mY[1]) === 2020) {
+          day = 27
+          if (day > 27 || day < 21) {
+            router.navigate(['/finished']);
+          }
+          this.days = answers.filter(x => x.id <= day);
+        }
+        else {
+          router.navigate(['/finished']);
+        }
+      })
+    }
   }
 
   ngOnInit(): void {
-    this.api.getPhoto().subscribe((res: any) => {
+    this.vkApi.getPhoto().subscribe((res: any) => {
       if (res.response) {
         this.userName = res.response[0].first_name;
         this.photoSrc = res.response[0].crop_photo.photo.sizes[5].url;
@@ -50,7 +67,7 @@ export class MainComponent implements OnInit {
   }
 
   public auth() {
-    this.api.getUser().subscribe(res => {
+    this.vkApi.getUser().subscribe(res => {
       if (res.response) {
         this.router.navigate(['/auth'])
       }
@@ -62,7 +79,7 @@ export class MainComponent implements OnInit {
 
   public getParams(response: string) {
     let paramString = response.split('&');
-    let params: {[key: string]: any} = {};
+    let params: { [key: string]: any } = {};
     paramString.forEach(param => {
       let paramObject = param.split('=');
       params[paramObject[0]] = paramObject[1];

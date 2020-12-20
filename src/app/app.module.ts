@@ -12,6 +12,7 @@ import { DayService } from './services/days.service';
 import { AnswerComponent } from './answer/answer.component';
 import { FinishedComponent } from './finished/finished.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ApiModule } from './apiModule/api.module';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
   ],
   imports: [
     BrowserModule,
+    ApiModule,
     JsonpInterceptingModule,
     FormsModule,
     ReactiveFormsModule,
@@ -31,7 +33,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     AppRoutingModule
   ],
   providers: [
-    ApiService,
     DayService
   ],
   bootstrap: [AppComponent]

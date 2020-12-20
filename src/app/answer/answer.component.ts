@@ -3,6 +3,8 @@ import { FormControl } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { Answer, answers, BaseAnswer } from '../models/answer.model';
+import { ApiService } from '../services/api.service';
+import { vkApiService } from '../services/vkApi.service';
 
 @Component({
   selector: 'app-answer',
@@ -16,9 +18,11 @@ export class AnswerComponent implements OnInit {
   public cardColor!: string;
   public pageImgs!: string[];
   public imgsClass!: string;
+  public user_id!: number;
+  private isFirstly: boolean = true;
   public answerControl: FormControl = new FormControl('');
   public disabledButton: boolean = true;
-  constructor(private route: ActivatedRoute) {
+  constructor(private route: ActivatedRoute, private vkApi: vkApiService, private api: ApiService) {
     route.params.subscribe(params => {
       this.answerId = params['id'];
       this.answer = answers.find(x => x.id == this.answerId) || BaseAnswer;
@@ -28,7 +32,7 @@ export class AnswerComponent implements OnInit {
       this.imgsClass = this.answer.class || '';
     })
     this.answerControl.valueChanges.subscribe(value => {
-      if (value) {
+      if (value && this.isFirstly) {
         this.disabledButton = false
       }
       else {
@@ -38,6 +42,34 @@ export class AnswerComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.vkApi.getUser().subscribe(res => {
+      this.user_id = res.response[0].id;
+      let answer = {
+        answer_id: this.answerId,
+        user_id: this.user_id
+      }
+      this.api.getAnswer(answer).subscribe(answer => {
+        if (answer) {
+          this.answerControl.setValue(answer.answer);
+          this.answerControl.disable();
+          this.disabledButton = true;
+          this.isFirstly = false;
+        }
+      })
+    })
   }
 
+  public sendAnswer() {
+    let answer = {
+      answer_id: this.answerId,
+      answer: this.answerControl.value,
+      user_id: this.user_id
+    };
+    this.api.addAnswer(answer).subscribe(res => {
+      console.log(res);
+      this.disabledButton = true;
+      this.isFirstly = false;
+      this.answerControl.disable();
+    })
+  }
 }

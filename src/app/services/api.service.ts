@@ -4,16 +4,31 @@ import { Injectable } from "@angular/core";
 
 @Injectable()
 export class ApiService {
-    private baseApi ='https://api.vk.com/method/';
-    private version = '5.126';
+    private baseUrl = 'http://advent.icsst.ru/adventBack/controller.php';
 
     constructor(private http: HttpClient) {}
-    
-    public getPhoto(): Observable<any> {
-        return this.http.jsonp<any>(`${this.baseApi}users.get?fields=crop_photo&v=${this.version}`, 'callback');
+
+    public getDate(): Observable<any> {
+        return this.http.get<any>(`${this.baseUrl}?key=get-date`)
     }
 
-    public getUser(): Observable<any> {
-        return this.http.jsonp<any>(`${this.baseApi}users.get?v=${this.version}`, 'callback');
+    public getUserData(id: number): Observable<any> {
+        return this.http.get<any>(`${this.baseUrl}?key=get-user&id=${id}`);
+    }
+
+    public addUser(user: any): Observable<any> {
+        return this.http.post<any>(`${this.baseUrl}?key=add-user`, user);
+    }
+
+    public updateUser(user: any): Observable<any> {
+        return this.http.post<any>(`${this.baseUrl}?key=update-user`, user);
+    }
+
+    public getAnswer(answer: any): Observable<any> {
+        return this.http.post<any>(`${this.baseUrl}?key=get-answer`, answer);
+    }
+
+    public addAnswer(answer: any): Observable<any> {
+        return this.http.post<any>(`${this.baseUrl}?key=add-answer`, answer);
     }
 }
