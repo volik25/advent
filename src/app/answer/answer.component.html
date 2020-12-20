@@ -13,7 +13,9 @@
                 {{answer.text}}
             </div>
             <textarea [formControl]="answerControl" rows="7" [ngClass]="answer.blackText ? 'black' : 'white'"></textarea>
-            <button [disabled]="disabledButton" class="btn btn-success" (click)="sendAnswer()">Сохранить</button>
+            <div class="d-flex justify-content-end align-items-center pr-3">
+                <button [disabled]="disabledButton" [ngClass]="btnClass" class="btn" (click)="sendAnswer()">Сохранить</button>
+            </div>
         </div>
     </div>
     <div class="w-100 mb-5">

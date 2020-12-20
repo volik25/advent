@@ -12,6 +12,16 @@
             border: none;
             color: white;
         }
+        .btn-white {
+            background-color: white;
+            &:hover {
+                box-shadow: 0 0 5px 3px #17B0AB;
+                color: #17B0AB;
+            }
+            &:active {
+                box-shadow: 0 0 5px 3px #17B0AB inset;
+            }
+        }
     }
     .gloves {
         position: absolute;
@@ -26,5 +36,14 @@
     .text {
         color: white;
         text-align: center;
+    }
+}
+
+@media(max-width: 900px) {
+    .gloves {
+        display: none;
+    }
+    .candle {
+        display: none;
     }
 }

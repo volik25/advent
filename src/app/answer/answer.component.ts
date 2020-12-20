@@ -18,6 +18,7 @@ export class AnswerComponent implements OnInit {
   public cardColor!: string;
   public pageImgs!: string[];
   public imgsClass!: string;
+  public btnClass!: string;
   public user_id!: number;
   private isFirstly: boolean = true;
   public answerControl: FormControl = new FormControl('');
@@ -30,6 +31,7 @@ export class AnswerComponent implements OnInit {
       this.cardColor = this.answer?.cardColor || '';
       this.pageImgs = this.answer?.images || [];
       this.imgsClass = this.answer.class || '';
+      this.btnClass = this.answer.btnClass || '';
     })
     this.answerControl.valueChanges.subscribe(value => {
       if (value && this.isFirstly) {

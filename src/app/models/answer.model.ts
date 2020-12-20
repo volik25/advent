@@ -6,6 +6,7 @@ export interface Answer {
     blackText?: boolean;
     class?: string;
     images?: string[];
+    btnClass?: string;
 }
 
 export const answers: Answer [] = [
@@ -15,45 +16,53 @@ export const answers: Answer [] = [
         cardColor: '#17B0AB',
         text: 'Кто издал указ, согласно которому Новый год необходимо отмечать первого января?',
         class: 'sock',
-        images: ['assets/resources/sock.svg']
+        images: ['assets/resources/sock.svg'],
+        btnClass: 'black-white'
     },
     {
         id: 22,
         bgUrl: 'assets/backgrounds/answer_2.svg',
         cardColor: '#17B0AB',
-        text: 'А сколько на самом деле идёт один год?\n– 365 дней;\n– 364 дня 22 часа 53 минуты;\n– 365 дней 5 часов 49 минут 30 секунд;\n– один год идёт один год.'
+        text: 'А сколько на самом деле идёт один год?\n– 365 дней;\n– 364 дня 22 часа 53 минуты;\n– 365 дней 5 часов 49 минут 30 секунд;\n– один год идёт один год.',
+        btnClass: 'black-white'
+   
     },
     {
         id: 23,
         bgUrl: 'assets/backgrounds/answer_3.svg',
         cardColor: '#FFFFFF',
         blackText: true,
-        text: 'Приведи пример оригинального раскрытия аббревиатуры своего факультета, подведя её под новогоднюю тематику. Оригинальность приветствуется!'
+        text: 'Приведи пример оригинального раскрытия аббревиатуры своего факультета, подведя её под новогоднюю тематику. Оригинальность приветствуется!',
+        btnClass: 'red-white'
     },
     {
         id: 24,
         bgUrl: 'assets/backgrounds/answer_4.svg',
         cardColor: '#DF4A4E',
-        text: 'Почему у Деда Мороза красный нос?'
+        text: 'Почему у Деда Мороза красный нос?',
+        btnClass: 'black-white'
     },
     {
         id: 25,
         bgUrl: 'assets/backgrounds/answer_5.svg',
         cardColor: '#17B0AB',
-        text: 'Опиши как можно оригинальнее 3 твоих любимых новогодних фильма одним предложением.'
+        text: 'Опиши как можно оригинальнее 3 твоих любимых новогодних фильма одним предложением.',
+        btnClass: 'black-white'
     },
     {
         id: 26,
         bgUrl: 'assets/backgrounds/answer_6.svg',
         cardColor: '#FFFFFF',
         blackText: true,
-        text: 'Назови как можно больше новогодних проектов ССт.'
+        text: 'Назови как можно больше новогодних проектов ССт.',
+        btnClass: 'red-white'
     },
     {
         id: 27,
         bgUrl: 'assets/backgrounds/answer_7.svg',
         cardColor: '#DF4A4E',
-        text: 'Ты наверняка замечал, что в сообществе F&U выходят авторские рубрики. Сколько всего активных авторских рубрик на данный момент существует?'
+        text: 'Ты наверняка замечал, что в сообществе F&U выходят авторские рубрики. Сколько всего активных авторских рубрик на данный момент существует?',
+        btnClass: 'black-white'
     },
 ]
 

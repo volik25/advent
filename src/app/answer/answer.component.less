@@ -9,7 +9,7 @@
             font-size: 1.5rem;
             font-weight: bolder;
             text-align: center;
-            padding: 10px;
+            padding: 2rem;
             white-space: pre-wrap;
         }
         textarea {
@@ -24,8 +24,9 @@
             }
         }
         .btn {
-            margin-left: 2rem;
             max-width: 120px;
+            margin-bottom: 2rem;
+            margin-right: 2rem;
         }
     }
 }
@@ -42,4 +43,45 @@
     position: absolute;
     right: 30px;
     top: 28px;
+}
+
+.black-white {
+    background-color: black;
+    color: white;
+    &:hover {
+        box-shadow: 0 0 5px 3px white;
+    }
+    &:active {
+        box-shadow: 0 0 5px 3px white inset;
+        border: white;
+    }
+}
+
+.red-white {
+    background-color: #DF4A4E;
+    color: white;
+    &:hover {
+        box-shadow: 0 0 5px 3px black;
+        color: black;
+        border: black;
+    }
+    &:active {
+        box-shadow: 0 0 5px 3px black inset;
+        color: black;
+        border: black;
+    }
+}
+
+@media(max-width: 560px) {
+    .sock {
+        display: none;
+    }
+    .answer-text {
+        padding: 0.5rem !important;
+        padding-top: 1rem !important;
+        font-size: 0.8rem !important;
+    }
+    .answer {
+        overflow: scroll;
+    }
 }
