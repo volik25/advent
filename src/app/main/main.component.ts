@@ -18,24 +18,45 @@ export class MainComponent implements OnInit {
   public crop!: any;
   public photoCrop!: any;
   public photoSrc!: string;
-  public days!: Answer[];
+  public days: Answer[] = answers;
   public userData: any = null;
-  constructor(private vkApi: vkApiService, private api: ApiService, private dS: DayService, private router: Router) {
+  private day!: number;
+  constructor(private vkApi: vkApiService, private api: ApiService, private router: Router) {
     let response = window.location.href.split('#')[1];
     if (response) {
       this.userData = this.getParams(response);
       sessionStorage.setItem('token', this.userData.access_token);
-      router.navigate(['/auth']);
+      this.vkApi.getUser().subscribe(res => {
+        if (res.response) {
+          this.api.getUserData(res.response[0].id).subscribe(userData => {
+            if (userData) {
+              if (!userData.faculty || !userData.course) {
+                router.navigate(['/auth']);
+              }
+              else {
+                window.location.href = this.mainUrl;
+              }
+            }
+          })
+        }
+        if (res.error) {
+          console.log(res.error);
+        }
+      })
     }
     else {
       this.api.getDate().subscribe((date: string) => {
-        let day = parseInt(date.substring(0, 2));
+        this.day = parseInt(date.substring(0, 2));
         let mY = date.substring(3).split('/')
         if (parseInt(mY[0]) === 12 && parseInt(mY[1]) === 2020) {
-          if (day > 27 || day < 21) {
+          if (this.day > 27 || this.day < 21) {
             router.navigate(['/finished']);
           }
-          this.days = answers.filter(x => x.id <= day);
+          this.days.forEach(dayOfDays => {
+            if (dayOfDays.id > this.day) {
+              dayOfDays.blocked = true
+            }
+          })
         }
         else {
           router.navigate(['/finished']);
@@ -62,7 +83,16 @@ export class MainComponent implements OnInit {
   }
 
   public toAnswer(id: number) {
-    this.router.navigate(['/answer', id]);
+    if (id <= this.day) {
+    this.vkApi.getUser().subscribe(res => {
+      if (res.response) {
+        this.router.navigate(['/answer', id]);
+      }
+      if (res.error) {
+        window.location.href = this.baseAuth;
+      }
+    })
+    }
   }
 
   public auth() {

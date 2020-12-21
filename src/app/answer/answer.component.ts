@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { Answer, answers, BaseAnswer } from '../models/answer.model';
 import { ApiService } from '../services/api.service';
@@ -23,7 +23,7 @@ export class AnswerComponent implements OnInit {
   private isFirstly: boolean = true;
   public answerControl: FormControl = new FormControl('');
   public disabledButton: boolean = true;
-  constructor(private route: ActivatedRoute, private vkApi: vkApiService, private api: ApiService) {
+  constructor(private route: ActivatedRoute, private vkApi: vkApiService, private api: ApiService, private router: Router) {
     route.params.subscribe(params => {
       this.answerId = params['id'];
       this.answer = answers.find(x => x.id == this.answerId) || BaseAnswer;
@@ -68,10 +68,7 @@ export class AnswerComponent implements OnInit {
       user_id: this.user_id
     };
     this.api.addAnswer(answer).subscribe(res => {
-      console.log(res);
-      this.disabledButton = true;
-      this.isFirstly = false;
-      this.answerControl.disable();
+      this.router.navigate(['']);
     })
   }
 }

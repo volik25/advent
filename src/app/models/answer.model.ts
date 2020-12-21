@@ -7,6 +7,7 @@ export interface Answer {
     class?: string;
     images?: string[];
     btnClass?: string;
+    blocked?: boolean;
 }
 
 export const answers: Answer [] = [
