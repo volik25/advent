@@ -13,6 +13,10 @@ export class vkApiService {
         return this.http.jsonp<any>(`${this.baseApi}users.get?fields=crop_photo&v=${this.version}`, 'callback');
     }
 
+    public getLink(ids: string): Observable<any> {
+        return this.http.jsonp<any>(`${this.baseApi}users.get?user_ids=${ids}&fields=domain&v=${this.version}`, 'callback');
+    }
+
     public getUser(): Observable<any> {
         return this.http.jsonp<any>(`${this.baseApi}users.get?v=${this.version}`, 'callback');
     }

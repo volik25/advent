@@ -12,6 +12,10 @@ export class ApiService {
         return this.http.get<any>(`${this.baseUrl}?key=get-date`)
     }
 
+    public getAnswers(): Observable<any> {
+        return this.http.get<any>(`${this.baseUrl}?key=get-answers`)
+    }
+
     public getUserData(id: number): Observable<any> {
         return this.http.get<any>(`${this.baseUrl}?key=get-user&id=${id}`);
     }
@@ -30,5 +34,9 @@ export class ApiService {
 
     public addAnswer(answer: any): Observable<any> {
         return this.http.post<any>(`${this.baseUrl}?key=add-answer`, answer);
+    }
+
+    public signIn(admin: any): Observable<any> {
+        return this.http.post<any>(`${this.baseUrl}?key=sign-in`, admin);
     }
 }

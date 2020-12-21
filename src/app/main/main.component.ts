@@ -3,7 +3,6 @@ import { Router } from '@angular/router';
 import { environment } from 'src/environments/environment';
 import { Answer, answers, BaseAnswer } from '../models/answer.model';
 import { ApiService } from '../services/api.service';
-import { DayService } from '../services/days.service';
 import { vkApiService } from '../services/vkApi.service';
 
 @Component({
@@ -34,7 +33,8 @@ export class MainComponent implements OnInit {
                 router.navigate(['/auth']);
               }
               else {
-                window.location.href = this.mainUrl;
+                // window.location.href = this.mainUrl;
+                window.history.back();
               }
             }
             else {
@@ -48,23 +48,7 @@ export class MainComponent implements OnInit {
       })
     }
     else {
-      this.api.getDate().subscribe((date: string) => {
-        this.day = parseInt(date.substring(0, 2));
-        let mY = date.substring(3).split('/')
-        if (parseInt(mY[0]) === 12 && parseInt(mY[1]) === 2020) {
-          if (this.day > 27 || this.day < 21) {
-            router.navigate(['/finished']);
-          }
-          this.days.forEach(dayOfDays => {
-            if (dayOfDays.id > this.day) {
-              dayOfDays.blocked = true
-            }
-          })
-        }
-        else {
-          router.navigate(['/finished']);
-        }
-      })
+      this.checkAdvent();
     }
   }
 
@@ -81,6 +65,26 @@ export class MainComponent implements OnInit {
       }
       if (res.error) {
         console.log(res.error);
+      }
+    })
+  }
+
+  private checkAdvent() {
+    this.api.getDate().subscribe((date: string) => {
+      this.day = parseInt(date.substring(0, 2));
+      let mY = date.substring(3).split('/')
+      if (parseInt(mY[0]) === 12 && parseInt(mY[1]) === 2020) {
+        if (this.day > 27 || this.day < 21) {
+          this.router.navigate(['/finished']);
+        }
+        this.days.forEach(dayOfDays => {
+          if (dayOfDays.id > this.day) {
+            dayOfDays.blocked = true
+          }
+        })
+      }
+      else {
+       this.router.navigate(['/finished']);
       }
     })
   }

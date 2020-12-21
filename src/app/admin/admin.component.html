@@ -1,0 +1,15 @@
+<table>
+    <thead>
+        <tr>
+            <th *ngFor="let head of headers">{{head}}</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let user of users">
+            <td>{{user.user_id}}</td>
+            <td>{{user.self_name}}</td>
+            <td>@{{user.domain}}</td>
+            <td>{{user.answers[0].answer}}</td>
+        </tr>
+    </tbody>
+</table>

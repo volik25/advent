@@ -13,6 +13,9 @@ import { AnswerComponent } from './answer/answer.component';
 import { FinishedComponent } from './finished/finished.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ApiModule } from './apiModule/api.module';
+import { AdminComponent } from './admin/admin.component';
+import { SignInComponent } from './sign-in/sign-in.component';
+import { AdminSecurity } from './security/admin.security';
 
 @NgModule({
   declarations: [
@@ -20,7 +23,9 @@ import { ApiModule } from './apiModule/api.module';
     AuthentificateComponent,
     MainComponent,
     AnswerComponent,
-    FinishedComponent
+    FinishedComponent,
+    AdminComponent,
+    SignInComponent
   ],
   imports: [
     BrowserModule,
@@ -33,7 +38,7 @@ import { ApiModule } from './apiModule/api.module';
     AppRoutingModule
   ],
   providers: [
-    DayService
+    AdminSecurity
   ],
   bootstrap: [AppComponent]
 })
