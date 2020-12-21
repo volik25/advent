@@ -37,6 +37,9 @@ export class MainComponent implements OnInit {
                 window.location.href = this.mainUrl;
               }
             }
+            else {
+              router.navigate(['/auth']);
+            }
           })
         }
         if (res.error) {
