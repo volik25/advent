@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { ApiService } from '../services/api.service';
 import { vkApiService } from '../services/vkApi.service';
 
@@ -11,10 +12,12 @@ export class AdminComponent implements OnInit {
 
   public users!: any[];
   public headers: string[] = ['user_id', 'self_name', 'domain'];
-  constructor(private api: ApiService, private vkApi: vkApiService) { }
+  constructor(private api: ApiService, private vkApi: vkApiService, private router: Router) { }
 
   ngOnInit(): void {
     this.api.getAnswers().subscribe(res => {
+      console.log(res);
+      
       this.users = res;
       let ids = '';
       res.forEach((users: { user_id: any; }) => {
@@ -48,4 +51,10 @@ export class AdminComponent implements OnInit {
     })
   }
 
+  public toMainOrLogOut(toMain: boolean) {
+    if (!toMain) {
+      sessionStorage.removeItem('adminData');
+    }
+    this.router.navigate(['']);
+  }
 }

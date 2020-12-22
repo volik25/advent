@@ -1,3 +1,6 @@
+<button class="btn btn-link" (click)="toMainOrLogOut(false)">Выйти</button>
+<button class="btn btn-primary" (click)="toMainOrLogOut(true)">На главную</button>
+
 <table>
     <thead>
         <tr>
@@ -8,7 +11,7 @@
         <tr *ngFor="let user of users">
             <td>{{user.user_id}}</td>
             <td>{{user.self_name}}</td>
-            <td>@{{user.domain}}</td>
+            <td><a [href]="'https://vk.com/' + user.domain" target="blank">@{{user.domain}}</a></td>
             <td>{{user.answers[0].answer}}</td>
         </tr>
     </tbody>

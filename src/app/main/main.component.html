@@ -13,7 +13,8 @@
             </div>
             <div>
                 <div class="d-flex justify-content-end align-items-center pt-2 pr-2">
-                    <div (click)="auth()" class="pointer no-active-border d-flex justify-content-end align-items-center">
+                    <div (click)="auth()"
+                        class="pointer no-active-border d-flex justify-content-end align-items-center">
                         <h6>{{userName ? userName : 'Авторизоваться'}}</h6>
                         <div class="img-block ml-2">
                             <img *ngIf="photoSrc" [src]="photoSrc" [style]="photoCrop">
@@ -29,7 +30,8 @@
         </div>
     </div>
     <div class="container d-flex flex-wrap justify-content-center">
-        <div class="advent-block pointer mx-3" *ngFor="let day of days" (click)="toAnswer(day.id)" [ngClass]="day.blocked ? 'blocked' : ''">
+        <div class="advent-block pointer mx-3" *ngFor="let day of days" (click)="toAnswer(day.id)"
+            [ngClass]="day.blocked ? 'blocked' : ''">
             {{day.id}}
         </div>
     </div>
@@ -45,3 +47,18 @@
         </div>
     </div>
 </div>
+
+<ng-template #content let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">Profile update</h4>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Save</button>
+    </div>
+</ng-template>
