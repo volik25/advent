@@ -1,10 +1,8 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { Router } from '@angular/router';
-import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { environment } from 'src/environments/environment';
-import { Answer, answers, BaseAnswer } from '../models/answer.model';
+import { Answer, answers } from '../models/answer.model';
 import { ApiService } from '../services/api.service';
-import { ModalService } from '../services/modal.service';
 import { vkApiService } from '../services/vkApi.service';
 
 @Component({
@@ -23,7 +21,7 @@ export class MainComponent implements OnInit {
   public days: Answer[] = answers;
   public userData: any = null;
   private day!: number;
-  constructor(private vkApi: vkApiService, private api: ApiService, private router: Router, private modalService: NgbModal, private mS: ModalService) {
+  constructor(private vkApi: vkApiService, private api: ApiService, private router: Router) {
     let response = window.location.href.split('#')[1];
     if (response) {
       this.userData = this.getParams(response);
@@ -70,19 +68,6 @@ export class MainComponent implements OnInit {
       }
     })
     console.log();
-    
-    if (this.mS.getIsFirstly() && !this.mS.getIsSubscribed()) {
-      this.openModal();
-    }
-  }
-
-  private openModal() {
-    this.modalService.open(SubscribeModalComponent, { windowClass: 'subscribe-modal', backdrop: 'static', centered: true, animation: true }).result.then((result) => {
-      this.mS.subscribe();
-      this.mS.notFirstly();
-    }, (reason) => {
-      this.mS.unSubscribe();
-    });
   }
 
   private checkAdvent() {
@@ -137,28 +122,5 @@ export class MainComponent implements OnInit {
       params[paramObject[0]] = paramObject[1];
     })
     return params;
-  }
-}
-
-@Component({
-  selector: 'subscribe-modal',
-  template: `
-  <div class="subscribe-body">
-    <div class="close" (click)="dismiss()"></div>
-    Будь каждый день первым в адвенте — подпишись на рассылку и стань к победе ещё ближе!
-    <button class="btn btn-subs mt-2" (click)="goTo()">Подписаться</button>
-  </div>
-  `,
-  styleUrls: ['./main.component.less']
-})
-export class SubscribeModalComponent {
-  constructor(private activeModal: NgbActiveModal) { }
-  public goTo() {
-    window.open("http://vk.me/finsst");
-    this.activeModal.close();
-  }
-
-  public dismiss() {
-    this.activeModal.dismiss();
   }
 }

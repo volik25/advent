@@ -72,55 +72,6 @@ h6 {
     }
 }
 
-.subscribe-modal .modal-dialog{
-    .modal-content{
-        border: 5px solid #E04B4E;
-        border-radius: 30px;
-        position: relative;
-        .subscribe-body {
-            margin: 16px;
-            padding: 8px;
-            border: 3px solid #15B2AB;
-            border-radius: 20px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            .close {
-                position: absolute;
-                top: -2rem;
-                right: -3rem;
-                display: block;
-                background-image: url(../../assets/resources/x.svg);
-                width: 3rem;
-                height: 3rem;
-                &:hover {
-                    cursor: pointer;
-                }
-            }
-            .btn-subs {
-                outline: none;
-                border: 3px solid #E04B4E;
-                border-radius: 10px;
-                background-color: #E04B4E;
-                color: white;
-                &:hover{
-                    box-shadow: 0 0 3px 2px #E04B4E;
-                }
-                &:active {
-                    outline: none;
-                    box-shadow: 0 0 3px 2px white;
-                }
-                &:focus {
-                    outline: none;
-                }
-            }
-        }
-    }
-    
-}
-
 @media(max-width: 993px) {
     .main {
         height: auto !important;
@@ -128,19 +79,5 @@ h6 {
     }
     .tree {
         margin-top: 0;
-    }
-}
-
-@media(max-width:560px) {
-    .subscribe-modal .modal-dialog{
-        .modal-content{
-            .subscribe-body {
-                .close {
-                    top: -3rem;
-                    right: -1rem;
-                }
-            }
-        }
-        
     }
 }

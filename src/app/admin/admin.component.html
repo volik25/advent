@@ -1,5 +1,7 @@
-<button class="btn btn-link" (click)="toMainOrLogOut(false)">Выйти</button>
-<button class="btn btn-primary" (click)="toMainOrLogOut(true)">На главную</button>
+<div class="d-flex justify-content-between align-items-center p-3">
+    <button class="btn btn-link" (click)="toMainOrLogOut(false)">Выйти</button>
+    <button class="btn btn-primary" (click)="toMainOrLogOut(true)">На главную</button>
+</div>
 
 <table>
     <thead>
@@ -12,7 +14,7 @@
             <td>{{user.user_id}}</td>
             <td>{{user.self_name}}</td>
             <td><a [href]="'https://vk.com/' + user.domain" target="blank">@{{user.domain}}</a></td>
-            <td>{{user.answers[0].answer}}</td>
+            <td *ngFor="let answer of user.answers">{{answer ? answer.answer : 'Не ответил'}}</td>
         </tr>
     </tbody>
 </table>
