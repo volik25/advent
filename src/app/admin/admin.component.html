@@ -14,7 +14,12 @@
             <td>{{user.user_id}}</td>
             <td>{{user.self_name}}</td>
             <td><a [href]="'https://vk.com/' + user.domain" target="blank">@{{user.domain}}</a></td>
-            <td *ngFor="let answer of user.answers">{{answer ? answer.answer : 'Не ответил'}}</td>
+            <td [ngClass]=" !user.faculty ? 'danger' : ''">{{user.faculty ? user.faculty : 'Не указано'}}</td>
+            <td [ngClass]=" !user.course ? 'danger' : ''">{{user.course ? user.course : 'Не указано'}}</td>
+            <td *ngFor="let answer of user.answers" [ngClass]=" answer.danger ? 'danger' : ''">{{answer.answer}}</td>
+            <!-- <td>
+                <input type="number" class="form-control">
+            </td> -->
         </tr>
     </tbody>
 </table>
