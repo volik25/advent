@@ -1,10 +1,29 @@
 .finished {
-    background-image: url(./../../assets/backgrounds/finished.svg);
+    background-image: url(./../../assets/winner/Fon.svg);
     height: 100vh;
+    .winner {
+        height: 300px;
+        border: 5px solid #DF4A4E;
+        padding: 1rem;
+        .photo {
+            border: 5px solid #14B1AB;
+            padding: 0.2rem;
+            height: 100%;
+            img {
+                height: 100%;
+            }
+        }
+    }
     .text {
         color: white;
-        font-size: 2rem;
+        font-size: 1.3rem;
         font-weight: bolder;
         text-align: center;
+    }
+}
+
+@media(max-width: 900px) {
+    .finished {
+        overflow-y: scroll;
     }
 }
